@@ -5,7 +5,7 @@
     "description": "Configura base_url con la URL pública y elige fechas libres antes de crear un contrato. El POST válido conserva contrato_id para el GET siguiente. Todos los clientes de esta colección son de demostración."
   },
   "variable": [
-    { "key": "base_url", "value": "http://localhost:3000" },
+    { "key": "base_url", "value": "https://constructora-el-salvador.onrender.com" },
     { "key": "maquinaria_id", "value": "1" },
     { "key": "fecha_inicio", "value": "2030-11-20" },
     { "key": "fecha_fin", "value": "2030-11-22" },

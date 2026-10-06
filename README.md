@@ -2,6 +2,8 @@
 
 Base funcional para consultar maquinaria y registrar contratos de alquiler. La interfaz y la API se sirven desde el mismo sitio; PostgreSQL conserva los datos en la nube y PGlite permite trabajar localmente.
 
+Aplicación pública: [constructora-el-salvador.onrender.com](https://constructora-el-salvador.onrender.com). El catálogo, la creación de contratos y la consulta por ID se verificaron contra PostgreSQL administrado.
+
 ## Iniciar en Windows
 
 Requisitos: Node.js 24 y npm. Abre una terminal en esta carpeta y ejecuta:

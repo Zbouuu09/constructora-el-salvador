@@ -1,0 +1,47 @@
+{
+  "method": "JSDOM integration harness with real HTTP API; no real browser or visual verification",
+  "passed": true,
+  "catalogueCards": 2,
+  "selectedMachine": "CAT 336",
+  "successfulPostStatus": 201,
+  "postRequests": 1,
+  "persistedContract": {
+    "id": "8f4db162-ed72-4248-aaac-ddbba4ad9c21",
+    "maquinaria_id": 1,
+    "maquinaria_nombre": "CAT 336",
+    "cliente": "QA DOM demo2055",
+    "fecha_inicio": "2055-10-20",
+    "fecha_fin": "2055-10-22",
+    "dias": 3,
+    "tarifa_diaria": 450,
+    "total": 1350,
+    "estado": "CONFIRMADO"
+  },
+  "confirmationId": "8f4db162-ed72-4248-aaac-ddbba4ad9c21",
+  "confirmationDays": "3 días",
+  "confirmationTotal": "$1,350.00",
+  "invertedDates": {
+    "additionalPostRequests": 0,
+    "invalidField": "fecha_fin",
+    "message": "La fecha de fin debe ser igual o posterior al inicio."
+  },
+  "domErrors": [],
+  "requests": [
+    {
+      "method": "GET",
+      "url": "http://localhost:3000/api/maquinaria",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "url": "http://localhost:3000/api/contratos",
+      "body": {
+        "maquinaria_id": 1,
+        "cliente": "QA DOM demo2055",
+        "fecha_inicio": "2055-10-20",
+        "fecha_fin": "2055-10-22"
+      },
+      "status": 201
+    }
+  ]
+}

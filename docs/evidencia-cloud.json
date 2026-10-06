@@ -1,0 +1,97 @@
+{
+  "checkedAt": "2026-10-06T15:32:53.590Z",
+  "baseUrl": "https://constructora-el-salvador.onrender.com",
+  "observations": [
+    {
+      "path": "/api/health",
+      "method": "GET",
+      "status": 200,
+      "data": {
+        "status": "ok",
+        "database": "postgresql"
+      }
+    },
+    {
+      "path": "/api/maquinaria",
+      "method": "GET",
+      "status": 200,
+      "data": [
+        {
+          "id": 1,
+          "nombre": "CAT 336",
+          "tipo": "Excavadora",
+          "descripcion": "Excavadora hidráulica para movimiento de tierra y obras de construcción.",
+          "tarifa_diaria": 450,
+          "disponible": true
+        },
+        {
+          "id": 2,
+          "nombre": "JCB 3CX",
+          "tipo": "Retroexcavadora",
+          "descripcion": "Retroexcavadora versátil para excavación, carga y mantenimiento de obras.",
+          "tarifa_diaria": 275,
+          "disponible": true
+        }
+      ]
+    },
+    {
+      "path": "/api/contratos",
+      "method": "POST",
+      "status": 201,
+      "data": {
+        "id": "1cc18688-2405-48e3-93a6-20ab9678fe28",
+        "maquinaria_id": 1,
+        "maquinaria_nombre": "CAT 336",
+        "cliente": "Cliente de demostración Sprint 0",
+        "fecha_inicio": "2026-10-20",
+        "fecha_fin": "2026-10-22",
+        "dias": 3,
+        "tarifa_diaria": 450,
+        "total": 1350,
+        "estado": "CONFIRMADO"
+      }
+    },
+    {
+      "path": "/api/contratos/1cc18688-2405-48e3-93a6-20ab9678fe28",
+      "method": "GET",
+      "status": 200,
+      "data": {
+        "id": "1cc18688-2405-48e3-93a6-20ab9678fe28",
+        "maquinaria_id": 1,
+        "maquinaria_nombre": "CAT 336",
+        "cliente": "Cliente de demostración Sprint 0",
+        "fecha_inicio": "2026-10-20",
+        "fecha_fin": "2026-10-22",
+        "dias": 3,
+        "tarifa_diaria": 450,
+        "total": 1350,
+        "estado": "CONFIRMADO"
+      }
+    },
+    {
+      "path": "/api/contratos",
+      "method": "POST",
+      "status": 409,
+      "data": {
+        "error": {
+          "code": "DATE_CONFLICT",
+          "message": "La maquinaria ya tiene un contrato en esas fechas. Selecciona otro período."
+        }
+      }
+    },
+    {
+      "path": "/api/contratos",
+      "method": "POST",
+      "status": 400,
+      "data": {
+        "error": {
+          "code": "VALIDATION_ERROR",
+          "message": "Revisa los datos del contrato.",
+          "fields": {
+            "fecha_fin": "La fecha de fin debe ser igual o posterior a la fecha de inicio."
+          }
+        }
+      }
+    }
+  ]
+}
