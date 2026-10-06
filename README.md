@@ -2,6 +2,8 @@
 
 Base funcional para consultar maquinaria y registrar contratos de alquiler. La interfaz y la API se sirven desde el mismo sitio; PostgreSQL conserva los datos en la nube y PGlite permite trabajar localmente.
 
+Aplicación pública: [constructora-el-salvador.onrender.com](https://constructora-el-salvador.onrender.com). El catálogo, la creación de contratos y la consulta por ID se verificaron contra PostgreSQL administrado.
+
 ## Iniciar en Windows
 
 Requisitos: Node.js 24 y npm. Abre una terminal en esta carpeta y ejecuta:
@@ -20,6 +22,8 @@ npm run db:seed
 ```
 
 Los dos últimos comandos preparan las tablas y el catálogo. Ejecuta los comandos con la misma configuración de base de datos que utilizará la aplicación.
+
+El catálogo y las tarifas son datos de demostración: CAT 336 a USD 450 por día y JCB 3CX a USD 275 por día.
 
 ## Flujo de demostración
 
@@ -41,5 +45,7 @@ El cuerpo del POST usa `maquinaria_id`, `cliente`, `fecha_inicio` y `fecha_fin`.
 - [Tareas, responsables y estado](docs/seguimiento-sprint.md).
 - [Repositorio, ramas y publicación en Render](docs/despliegue.md).
 - [Prueba cruzada y ensayo con proyector](docs/ensayo-y-evidencia.md).
+- [Resultados de pruebas](docs/resultados-pruebas.md).
+- [Colección importable en Postman](docs/postman.json): cambia `base_url` y selecciona fechas libres antes del POST; la consulta siguiente usa el ID generado.
 
-El repositorio previsto es `Zbouuu09/constructora-el-salvador`. La guía de publicación no demuestra que el repositorio remoto o los servicios ya existan: la evidencia de cada paso se registra en el seguimiento. Nunca subas `.env`, contraseñas ni cadenas de conexión a GitHub o a la hoja compartida.
+Repositorio: [Zbouuu09/constructora-el-salvador](https://github.com/Zbouuu09/constructora-el-salvador). La evidencia de cada paso se registra en el seguimiento. Nunca subas `.env`, contraseñas ni cadenas de conexión a GitHub o a la hoja compartida.

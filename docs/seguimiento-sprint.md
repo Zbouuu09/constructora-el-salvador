@@ -22,28 +22,29 @@ Fuente: [hoja del sprint](https://docs.google.com/spreadsheets/d/118feVEbHNlqrD7
 
 ## Estado de la entrega y evidencia
 
-La API, la interfaz y el modelo están implementados. Las 13 pruebas automáticas aprobaron contra PostgreSQL embebido PGlite, incluida la reapertura de la base, rollback y reservas simultáneas. La verificación de navegador y de la nube permanece separada: no se marca una tarea `DONE` únicamente por disponer de archivos locales.
+La API, la interfaz y el modelo están implementados. Las 13 pruebas automáticas aprobaron contra PostgreSQL embebido PGlite, y el catálogo, la creación y la consulta de contratos se comprobaron en PostgreSQL de Render. También aprobó una prueba de integración DOM con la API local. El recorrido del formulario público y su revisión visual aprobaron en un navegador real automatizado; el contrato se recuperó después por una consulta HTTP independiente. La prueba cruzada de un compañero y el ensayo del equipo con proyector siguen pendientes.
 
 | Área | Estado a registrar | Evidencia |
 | --- | --- | --- |
-| Implementación local de API, UI y modelo | Implementada; 13/13 pruebas automáticas aprobadas. | Node 24.19.0: `node --test --test-isolation=none backend/*.test.mjs`. Prueba de navegador pendiente. |
-| Repositorio remoto y ramas | Repositorio público creado; publicación de código y ramas en curso. | [Repositorio](https://github.com/Zbouuu09/constructora-el-salvador). |
-| Protección de `main` | Pendiente de aplicación/verificación. | Pendiente: captura o configuración comprobada. |
-| PostgreSQL compartido | Instancia gratuita creada en Render, estado `available`; tablas y contratos en nube pendientes. | Recurso `dpg-db2h0mmi0phs73elivo0-a`, región Oregon, PostgreSQL 17. |
-| CI de GitHub | Pendiente de ejecución remota. | Pendiente: enlace de la ejecución `Pruebas`. |
-| Sitio público y despliegue automático | Pendiente de despliegue/verificación. | Pendiente: URL, health y actualización desde `main`. |
-| Revisión de PR por otro integrante | Pendiente de realización. | Pendiente: PR y aprobación auténtica. |
+| Implementación local de API, UI y modelo | Implementada; 13/13 pruebas backend e integración DOM + API aprobadas. | [Resultados](resultados-pruebas.md). |
+| Recorrido del formulario público y revisión visual | Aprobados con navegador real automatizado: catálogo de dos máquinas, JCB 3CX, 2026-10-23 a 2026-10-25, 3 días y USD 825; confirmación y consulta independiente HTTP 200. | [Evidencia de navegador](evidencia-navegador.json); contrato `de5a887a-fa57-4b23-8306-325153056f23`; captura entregada `contrato-publico.jpg`. El ensayo con proyector sigue pendiente. |
+| Repositorio remoto y ramas | Código del PR #1 integrado en `main`; verificadas `ivan`, `kevin`, `jose`, `mariela`, `victor`. El acceso real de los compañeros sigue pendiente de acreditación. | [Repositorio](https://github.com/Zbouuu09/constructora-el-salvador), [PR #1 integrado](https://github.com/Zbouuu09/constructora-el-salvador/pull/1). |
+| Protección de `main` | Ruleset activo y verificado sobre la rama predeterminada; bloquea borrado y force push. Exige el check `Pruebas` de GitHub Actions, PR con una aprobación y conversaciones resueltas. | [Regla](https://github.com/Zbouuu09/constructora-el-salvador/settings/rules/24590775); API confirmó `active`, `~DEFAULT_BRANCH`, `integration_id: 15368`, `required_approving_review_count: 1` y `required_review_thread_resolution: true`. |
+| PostgreSQL compartido | Instancia gratuita activa; catálogo y contrato guardado comprobados por la API pública. Compartir la conexión privada al equipo sigue pendiente. | Recurso `dpg-db2h0mmi0phs73elivo0-a`, PostgreSQL 17; health informa `postgresql`; contrato `1cc18688-2405-48e3-93a6-20ab9678fe28`. |
+| CI de GitHub | Ejecución del PR #1 aprobada (`success`). | [CI del PR #1](https://github.com/Zbouuu09/constructora-el-salvador/actions/runs/37486556228). |
+| Sitio público y despliegue automático | Despliegue `live` verificado; conectado a `main` con `autoDeployTrigger: checksPass`. | [Aplicación](https://constructora-el-salvador.onrender.com), despliegue `dep-db2h560m7kps73erjmi0`, commit `69040e72f10ace91b61933001828132ccdfff8d1`. |
+| Revisión de PR por otro integrante | PR #1 integrado tras revisión técnica automatizada. PR #2 abierto para revisión y aprobación humanas; no se acredita una aprobación de otro integrante. | [PR #1 integrado](https://github.com/Zbouuu09/constructora-el-salvador/pull/1), [PR #2 pendiente de aprobación humana](https://github.com/Zbouuu09/constructora-el-salvador/pull/2), [resultados](resultados-pruebas.md). |
 | Prueba cruzada y ensayo con proyector | Pendiente de realización por el equipo. | Pendiente: ficha de [ensayo y evidencia](ensayo-y-evidencia.md). |
 
 ## Definition of Done
 
-- [ ] Repositorio remoto accesible al equipo con las cinco ramas y `main` protegida.
-- [ ] La comprobación `Pruebas` de GitHub pasa para el cambio que se presenta.
-- [ ] Render publica la versión integrada desde `main`; URL y health funcionan desde fuera del equipo de desarrollo.
-- [ ] PostgreSQL contiene CAT 336 y JCB 3CX; un contrato creado mediante la API puede consultarse por su ID.
-- [ ] El formulario del sitio público completa el recorrido catálogo → selección → contrato → confirmación.
-- [ ] Cliente vacío, maquinaria inexistente, fechas inválidas y fecha final anterior a la inicial se rechazan sin guardar contratos inválidos.
+- [ ] Repositorio remoto accesible a los integrantes del equipo; las cinco ramas y la protección de `main` están verificadas, pero falta acreditar el acceso de los compañeros.
+- [x] La comprobación `Pruebas` de GitHub pasa para la versión integrada mediante el PR #1.
+- [x] Render publica la versión integrada desde `main`; URL y health funcionan desde fuera del equipo de desarrollo.
+- [x] PostgreSQL contiene CAT 336 y JCB 3CX; un contrato creado mediante la API puede consultarse por su ID.
+- [x] El formulario del sitio público completa el recorrido catálogo → selección → contrato → confirmación; el contrato se recuperó por ID después de la prueba en navegador real.
+- [x] Cliente vacío, maquinaria inexistente, fechas inválidas y fecha final anterior a la inicial se rechazan sin guardar contratos inválidos.
 - [ ] Un compañero distinto del autor ejecuta el recorrido y deja evidencia auténtica.
-- [ ] El PR tiene la revisión requerida y sus conversaciones están resueltas antes del merge.
+- [ ] El PR #2 tiene la aprobación humana requerida y sus conversaciones están resueltas antes del merge.
 - [ ] El equipo ensaya en el equipo/proyector que usará y registra el resultado.
 - [ ] La hoja registra evidencia o estado pendiente; no contiene secretos ni resultados inventados.

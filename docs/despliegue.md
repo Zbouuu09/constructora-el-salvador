@@ -1,6 +1,6 @@
 # Repositorio, CI y despliegue
 
-Esta guía usa el repositorio previsto `Zbouuu09/constructora-el-salvador` y un Blueprint de Render con servicio Node.js y PostgreSQL. La creación y los resultados reales se registran en [seguimiento](seguimiento-sprint.md).
+El repositorio [Zbouuu09/constructora-el-salvador](https://github.com/Zbouuu09/constructora-el-salvador) y [la aplicación pública](https://constructora-el-salvador.onrender.com) están publicados con Node.js y PostgreSQL en Render. Esta guía permite reproducir la configuración; los resultados y pendientes están en [seguimiento](seguimiento-sprint.md).
 
 ## T0.1 · Repositorio y ramas
 
