@@ -27,12 +27,12 @@ La API, la interfaz y el modelo están implementados. Las 13 pruebas automática
 | Área | Estado a registrar | Evidencia |
 | --- | --- | --- |
 | Implementación local de API, UI y modelo | Implementada; 13/13 pruebas automáticas aprobadas. | Node 24.19.0: `node --test --test-isolation=none backend/*.test.mjs`. Prueba de navegador pendiente. |
-| Repositorio remoto y ramas | Repositorio público creado; publicación de código y ramas en curso. | [Repositorio](https://github.com/Zbouuu09/constructora-el-salvador). |
+| Repositorio remoto y ramas | Código integrado en `main`; verificadas `ivan`, `kevin`, `jose`, `mariela`, `victor`. | [Repositorio](https://github.com/Zbouuu09/constructora-el-salvador), [PR #1 integrado](https://github.com/Zbouuu09/constructora-el-salvador/pull/1). |
 | Protección de `main` | Pendiente de aplicación/verificación. | Pendiente: captura o configuración comprobada. |
 | PostgreSQL compartido | Instancia gratuita creada en Render, estado `available`; tablas y contratos en nube pendientes. | Recurso `dpg-db2h0mmi0phs73elivo0-a`, región Oregon, PostgreSQL 17. |
-| CI de GitHub | Pendiente de ejecución remota. | Pendiente: enlace de la ejecución `Pruebas`. |
+| CI de GitHub | Ejecución de PR aprobada (`success`). | [CI del PR #1](https://github.com/Zbouuu09/constructora-el-salvador/actions/runs/37486556228). |
 | Sitio público y despliegue automático | Pendiente de despliegue/verificación. | Pendiente: URL, health y actualización desde `main`. |
-| Revisión de PR por otro integrante | Pendiente de realización. | Pendiente: PR y aprobación auténtica. |
+| Revisión de PR por otro integrante | Revisión técnica automatizada e integración realizadas; aprobación humana pendiente. | [PR #1](https://github.com/Zbouuu09/constructora-el-salvador/pull/1), [resultados](resultados-pruebas.md). |
 | Prueba cruzada y ensayo con proyector | Pendiente de realización por el equipo. | Pendiente: ficha de [ensayo y evidencia](ensayo-y-evidencia.md). |
 
 ## Definition of Done

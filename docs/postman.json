@@ -1,0 +1,75 @@
+{
+  "info": {
+    "name": "Constructora El Salvador - Sprint 0",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Configura base_url con la URL pública y elige fechas libres antes de crear un contrato. El POST válido conserva contrato_id para el GET siguiente. Todos los clientes de esta colección son de demostración."
+  },
+  "variable": [
+    { "key": "base_url", "value": "http://localhost:3000" },
+    { "key": "maquinaria_id", "value": "1" },
+    { "key": "fecha_inicio", "value": "2030-11-20" },
+    { "key": "fecha_fin", "value": "2030-11-22" },
+    { "key": "contrato_id", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Health y conexión a base de datos",
+      "request": { "method": "GET", "url": "{{base_url}}/api/health" },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+        "pm.test('HTTP 200', () => pm.response.to.have.status(200));",
+        "pm.test('Base disponible', () => pm.expect(pm.response.json().status).to.eql('ok'));"
+      ] } }]
+    },
+    {
+      "name": "Consultar catálogo",
+      "request": { "method": "GET", "url": "{{base_url}}/api/maquinaria" },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+        "pm.test('HTTP 200', () => pm.response.to.have.status(200));",
+        "pm.test('CAT 336 y JCB 3CX', () => { const names = pm.response.json().map(x => x.nombre); pm.expect(names).to.include('CAT 336'); pm.expect(names).to.include('JCB 3CX'); });"
+      ] } }]
+    },
+    {
+      "name": "Crear contrato con fechas libres",
+      "request": {
+        "method": "POST", "url": "{{base_url}}/api/contratos",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n  \"maquinaria_id\": {{maquinaria_id}},\n  \"cliente\": \"Cliente de demostración Sprint 0\",\n  \"fecha_inicio\": \"{{fecha_inicio}}\",\n  \"fecha_fin\": \"{{fecha_fin}}\"\n}", "options": { "raw": { "language": "json" } } }
+      },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+        "pm.test('HTTP 201', () => pm.response.to.have.status(201));",
+        "if (pm.response.code === 201) { const contract = pm.response.json(); pm.collectionVariables.set('contrato_id', contract.id); pm.test('Total calculado por servidor', () => pm.expect(contract.total).to.eql(contract.dias * contract.tarifa_diaria)); }"
+      ] } }]
+    },
+    {
+      "name": "Consultar el contrato persistido",
+      "request": { "method": "GET", "url": "{{base_url}}/api/contratos/{{contrato_id}}" },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+        "pm.test('HTTP 200', () => pm.response.to.have.status(200));",
+        "pm.test('Mismo ID', () => pm.expect(pm.response.json().id).to.eql(pm.collectionVariables.get('contrato_id')));"
+      ] } }]
+    },
+    {
+      "name": "Rechazar fechas superpuestas",
+      "request": {
+        "method": "POST", "url": "{{base_url}}/api/contratos",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\"maquinaria_id\": {{maquinaria_id}}, \"cliente\": \"Cliente demo conflicto\", \"fecha_inicio\": \"{{fecha_inicio}}\", \"fecha_fin\": \"{{fecha_fin}}\"}", "options": { "raw": { "language": "json" } } }
+      },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+        "pm.test('HTTP 409', () => pm.response.to.have.status(409));",
+        "pm.test('Conflicto visible', () => pm.expect(pm.response.json().error.code).to.eql('DATE_CONFLICT'));"
+      ] } }]
+    },
+    {
+      "name": "Rechazar fin anterior a inicio",
+      "request": {
+        "method": "POST", "url": "{{base_url}}/api/contratos",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\"maquinaria_id\": {{maquinaria_id}}, \"cliente\": \"Cliente demo inválido\", \"fecha_inicio\": \"2030-12-22\", \"fecha_fin\": \"2030-12-20\"}", "options": { "raw": { "language": "json" } } }
+      },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+        "pm.test('HTTP 400', () => pm.response.to.have.status(400));"
+      ] } }]
+    }
+  ]
+}
